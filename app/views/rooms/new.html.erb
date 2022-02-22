@@ -1,0 +1,47 @@
+<h3>ルーム情報登録</h3>
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<%= form_with model: @room do |f| %>
+  <table>
+    <tr>
+      <div>
+        <th><%= f.label :name ,"ルーム名" %><span>必須</span></th>
+        <td><%= f.text_field :name %></td>
+      </div>
+    </tr>
+
+    <tr>
+      <div>
+        <th><%= f.label :introduction ,"ルーム紹介" %><span>必須</span></th>
+        <td><%= f.text_area :introduction %></td>
+      </div>
+    </tr>
+
+    <tr>
+      <div>
+        <th><%= f.label :price ,"料金" %><span>必須</span></th>
+        <td><%= f.number_field :price %></td>
+      </div>
+    </tr>
+
+    <tr>
+      <div>
+        <th><%= f.label :address ,"住所" %><span>必須</span></th>
+        <td><%= f.text_area :address %></td>
+      </div>
+    </tr>
+
+    <tr>
+      <div>
+        <th><%= f.label :image ,"ルーム画像" %><span>必須</span></th>
+        <td><%= f.file_field :image %></td>
+      </div>
+    </tr>
+  </table>
+
+  <p><%= f.submit "登録"%></p>
+  <%= link_to "ホームへ戻る", home_index_url %>
+
+<% end %>

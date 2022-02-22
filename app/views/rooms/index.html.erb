@@ -1,0 +1,39 @@
+<h3>ルーム登録一覧</h3>
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>ルーム名</th>
+      <th>ルーム紹介</th>
+      <th>料金</th>
+      <th>住所</th>
+      <th>更新日</th>
+      <th>作成日</th>
+      <th>ルーム画像</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td><%= room.name %></td>
+        <td><%= room.introduction %></td>
+        <td><%= room.price %></td>
+        <td><%= room.address %></td>
+        <td><%= room.updated_at.to_s(:datetime_jp) %></td>
+        <td><%= room.created_at.to_s(:datetime_jp) %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <%= link_to "ホームへ戻る", home_index_url %>
+  </li>
+</ul>
+

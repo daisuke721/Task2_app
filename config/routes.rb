@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   get 'home/index'
   root to: 'home#index'
 
+  resources :rooms
+
+  resources :reservations
+
   # devise_for :users, :controllers => {
   #   :registrations => 'usres/registrations',
   #   :sessions => 'users/sessions'
