@@ -1,4 +1,4 @@
-*, ::after, ::before {
+ *, ::after, ::before {
   box-sizing: border-box;
 }
 
@@ -350,6 +350,7 @@ div {
 }
 
 .top .form-area {
+  width: 450px;
   background: #fff;
   padding: 24px;
   border-radius: 5px;

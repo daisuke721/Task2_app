@@ -3,9 +3,20 @@ Rails.application.routes.draw do
   get 'home/index'
   root to: 'home#index'
 
-  resources :rooms
+  resources :users
 
-  resources :reservations
+  resources :rooms do
+    collection do
+      get :search
+    end
+  end
+
+  resources :reservations do
+    collection do
+      get :back
+    end
+  end
+
 
   # devise_for :users, :controllers => {
   #   :registrations => 'usres/registrations',

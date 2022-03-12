@@ -1,0 +1,42 @@
+<h3>予約内容確認</h3>
+
+<table>
+  <tr>
+    <th>予約開始日</th>
+    <th>予約終了日</th>
+    <th>予約人数</th>
+    <th>使用日数</th>
+    <th>合計金額</th>
+  </tr>
+
+  <tr>
+    <td><%= @reservation.start_day %></td>
+    <td><%= @reservation.end_day %></td>
+    <td><%= @reservation.customer %></td>
+    <td><%= @reservation.total_days %></td>
+    <td><%= @reservation.total_price %></td>
+  </tr>
+</table>
+
+
+<%= form_with model: @reservation, method: :post ,local: true do |reservation| %>
+  <p><%= reservation.submit "登録完了" %></p>
+    <%= reservation.hidden_field :start_day, value: @reservation.start_day %>
+    <%= reservation.hidden_field :end_day, value: @reservation.end_day %>
+    <%= reservation.hidden_field :customer, value: @reservation.customer %>
+    <%= reservation.hidden_field :total_days, value: @reservation.total_days %>
+    <%= reservation.hidden_field :total_price, value: @reservation.total_price %>
+    <%= reservation.hidden_field :room_id, value: @reservation.room_id %>
+<% end %>
+
+<%= form_with model: @reservation, url: back_reservations_path, method: :get ,local: true do |reservation| %>
+  <p><%= reservation.submit "詳細へ戻る" %></p>
+    <%= reservation.hidden_field :start_day, value: @reservation.start_day %>
+    <%= reservation.hidden_field :end_day, value: @reservation.end_day %>
+    <%= reservation.hidden_field :customer, value: @reservation.customer %>
+    <%= reservation.hidden_field :total_days, value: @reservation.total_days %>
+    <%= reservation.hidden_field :total_price, value: @reservation.total_price %>
+    <%= reservation.hidden_field :room_id, value: @reservation.room_id %>
+<% end %>
+
+<%= link_to "ホームへ戻る", home_index_url %>
