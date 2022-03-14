@@ -1,0 +1,36 @@
+<div class="container">
+  <h3>ルーム検索</h3>
+  <h4>検索結果:<%= @rooms.count %>件</h4>
+
+  <table>
+    <tr>
+      <th>ルーム画像</th>
+      <th>ルーム名</th>
+      <th>住所</th>
+      <th>ルーム紹介</th>
+      <th>料金</th>
+    </tr>
+
+    <% @rooms.each do |room| %>
+      <tr>
+        <td>
+          <%= link_to room_path(room) do %>
+            <% if room.name? %>
+              <%= image_tag room.image.url %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= link_to room.name, room_path(room) %></td>
+        <td><%= room.address %></td>
+        <td><%= room.introduction %></td>
+        <td>¥<%= room.price %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <ul>
+    <li>
+      <%= link_to "ホームへ戻る", home_index_url %>
+    </li>
+  </ul>
+</div>

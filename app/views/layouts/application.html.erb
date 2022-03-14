@@ -7,10 +7,74 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header class=>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/"><img src="https://presite-potepancamp-rails-02.herokuapp.com/assets/logo.png" alt="サイトのロゴ画像"></a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="Navber">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <div class="nav-link active">
+                  <%= form_with url: search_rooms_path, method: :get, local: true do |f| %>
+                    <%= f.text_field :address, placeholder: "エリア" %>
+                  <% end %>
+                </div>
+              </li>
+              <li class="nav-item">
+                <div class="nav-link active">
+                  <%= form_with url: search_rooms_path, method: :get, local: true do |f| %>
+                    <%= f.text_field :keyword, placeholder: "キーワード" %>
+                  <% end %>
+                </div>
+              </li>
+            </ul><!-- /.navbar-collapse -->
+
+              <div class="header-right-nav">
+                <% if user_signed_in? %>
+                  <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <%= current_user.name %>
+                        <% if current_user.image?%>
+                          <%= image_tag current_user.image.url, class: "icon-image"%>
+                        <% else %>
+                          <%= image_tag "/assets/default.png", class: "icon-image" %>
+                        <% end %>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li class="dropdown-item"><%= link_to "ルーム登録", new_room_path %></li>
+                      <li class="dropdown-item"><%= link_to "予約済みルーム一覧", :reservations %></li>
+                      <li class="dropdown-item"><%= link_to "登録済みルーム一覧", :rooms %></li>
+                      <li class="dropdown-item"><%= link_to "設定", user_path(current_user) %></li>
+                      <li class="dropdown-item"><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></li>
+                    </ul>
+                  </li>
+                <% else %>
+                    <div class="btn-toolbar" role="toolbar" aria-label="ボタングループのツールバー">
+                      <div class="btn-group me-2" role="group" aria-label="第一グループ">
+                        <button type="button" class="btn btn-primary"><%= link_to "ログイン", new_user_session_path %></button>
+                      </div>
+                      <div class="btn-group me-2" role="group" aria-label="第二グループ">
+                        <button type="button" class="btn btn-secondary"><%= link_to "新規登録", new_user_registration_path %></button>
+                      </div>
+                    </div>
+                <% end %>
+              </div>
+          </div><!-- /.container-fluid -->
+      </nav>
+    </header>
+
     <%= yield %>
+    <footer class="footer">
+      <p>© 2020 POTEPAN.INC.</p>
+    </footer>
   </body>
 </html>

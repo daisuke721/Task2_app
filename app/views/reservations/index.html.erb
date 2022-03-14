@@ -1,0 +1,44 @@
+<div class="container">
+  <h3>予約済みルーム一覧</h3>
+
+  <table>
+    <tr>
+      <th>ルーム画像</th>
+      <th>ルーム名</th>
+      <th>ルーム紹介</th>
+      <th>合計料金</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>予約確定日</th>
+      <th>削除</th>
+    </tr>
+
+    <% @reservations.each do |reservation| %>
+
+    <tr>
+      <td>
+        <%= link_to room_path(reservation.room_id) do %>
+          <% if reservation.room.image? %>
+            <%= image_tag reservation.room.image.url %>
+          <% end %>
+        <% end %>
+      </td>
+      <td><%= link_to reservation.room.name, room_path(reservation.room_id)%></td>
+      <td><%= reservation.room.introduction %></td>
+      <td><%= reservation.total_price %></td>
+      <td><%= reservation.start_day.to_s(:datetime_jp) %></td>
+      <td><%= reservation.end_day.to_s(:datetime_jp) %></td>
+      <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+      <td>
+        <%= link_to "削除", reservation, method: :delete, data: {confirm: "本当に削除しますか？"} %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+
+  <ul>
+    <li>
+      <%= link_to "ホームへ戻る", home_index_url %>
+    </li>
+  </ul>
+</div>

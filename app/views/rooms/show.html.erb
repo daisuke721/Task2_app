@@ -1,0 +1,60 @@
+<div class="container">
+  <h3>ルーム詳細</h3>
+  <% if flash[:notice] %>
+    <p class="notice"><%= flash[:notice]%></p>
+  <% end %>
+
+  <table>
+    <tr>
+      <td>
+        <% if @room.image? %>
+          <%= image_tag @room.image.url %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <% if @room.user.image? %>
+          <img src=<%= @room.user.image %>>
+        <% else %>
+          <%= image_tag "/assets/default.png", class: "icon-image" %>
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td><%= @room.name %></td>
+      <td><%= @room.address %></td>
+    </tr>
+
+    <tr>
+      <td><%= @room.introduction %></td>
+    </tr>
+  </table>
+
+  <p>¥<%= @room.price %>/日</p>
+
+  <%= form_with model:@reservation, url: new_reservation_path, method: :get ,local: true do |f| %>
+
+    <%= f.label :start_day, "開始日" %>
+    <%= f.date_field :start_day, placeholder: "年/月/日" %>
+    <%= f.label :end_day, "終了日" %>
+    <%= f.date_field :end_day, placeholder: "年/月/日" %>
+    <%= f.label :customer, "人数" %>
+    <%= f.number_field :customer %>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <% if user_signed_in?  %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.submit "予約する" %>
+    <% else %>
+      <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
+  <% end %>
+
+  <ul>
+    <li>
+      <%= link_to "ホームへ戻る", home_index_url %>
+    </li>
+  </ul>
+</div>

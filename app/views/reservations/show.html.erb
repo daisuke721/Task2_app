@@ -1,0 +1,31 @@
+<div class="container">
+  <h3>予約内容確定</h3>
+
+  <table>
+    <tr>
+      <th>予約した部屋</th>
+      <td><%= @reservation.room.name %></td>
+    </tr>
+
+    <tr>
+      <th>開始日</th>
+      <td><%= @reservation.start_day %></td>
+    </tr>
+
+    <tr>
+      <th>終了日</th>
+      <td><%= @reservation.end_day %></td>
+    </tr>
+
+      <tr>
+      <th>価格</th>
+      <td><%= @reservation.total_price %>円</td>
+    </tr>
+  </table>
+
+  <ul>
+    <li>
+      <%= link_to "予約一覧へ戻る", :reservations %>
+    </li>
+  </ul>
+</div>
