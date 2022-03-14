@@ -1,41 +1,43 @@
-<h3>ルーム登録一覧</h3>
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
+<div class="container">
+  <h3 class="mt-3 mb-3 pb-5">ルーム登録一覧</h3>
+  <% if flash[:notice] %>
+    <p class="notice"><%= flash[:notice] %></p>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>ルーム画像</th>
-      <th>ルーム名</th>
-      <th>ルーム紹介</th>
-      <th>料金</th>
-      <th>住所</th>
-      <th>作成日</th>
-      <th>削除</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @rooms.each do |room| %>
+  <table class="border-collapse">
+    <thead>
       <tr>
-        <td><%= link_to image_tag(room.image.url), room_path(room.id) %></td>
-        <td><%= link_to room.name,room_path(room.id) %></td>
-        <td><%= room.introduction %></td>
-        <td><%= room.price %></td>
-        <td><%= room.address %></td>
-        <td><%= room.created_at.to_s(:datetime_jp) %></td>
-        <td>
-          <%= link_to "削除", room, method: :delete, data: {confirm: "本当に削除しますか？"} %>
-        </td>
+        <th>ルーム画像</th>
+        <th>ルーム名</th>
+        <th>ルーム紹介</th>
+        <th>料金</th>
+        <th>住所</th>
+        <th>作成日</th>
+        <th>削除</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<ul>
-  <li>
-    <%= link_to "ホームへ戻る", home_index_url %>
-  </li>
-</ul>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= link_to image_tag(room.image.url), room_path(room.id) %></td>
+          <td><%= link_to room.name,room_path(room.id) %></td>
+          <td><%= room.introduction %></td>
+          <td><%= room.price %></td>
+          <td><%= room.address %></td>
+          <td><%= room.created_at.to_s(:datetime_jp) %></td>
+          <td>
+            <%= link_to "削除", room, method: :delete, data: {confirm: "本当に削除しますか？"} %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <ul>
+    <li>
+      <%= link_to "ホームへ戻る", home_index_url %>
+    </li>
+  </ul>
+</div>
 

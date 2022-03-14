@@ -44,7 +44,7 @@
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <%= current_user.name %>
                         <% if current_user.image?%>
-                          <img src=<%= image_tag current_user.image.url %> class ="icon-image">
+                          <%= image_tag current_user.image.url, class: "icon-image"%>
                         <% else %>
                           <%= image_tag "/assets/default.png", class: "icon-image" %>
                         <% end %>
@@ -76,6 +76,5 @@
     <footer class="footer">
       <p>© 2020 POTEPAN.INC.</p>
     </footer>
-
   </body>
 </html>
